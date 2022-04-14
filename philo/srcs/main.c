@@ -6,18 +6,41 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:49:39 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/14 16:23:51 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 16:59:01 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
+int	check_args(char	**argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (argv[i][j] <= '0' && argv[i][j] >= '9')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
-	(void)argv;
 	if (argc >= 4 && argc <= 5)
 	{
-		return (0);
+		if (!check_args(argv))
+		{
+			ft_putendl_fd("OK", 1); // To delete
+			return (0);
+		}
 	}
 	ft_putendl_fd("Wrong arguments", 2);
 	return (1);
