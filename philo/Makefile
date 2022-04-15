@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/14 16:01:20 by acroisie          #+#    #+#              #
-#    Updated: 2022/04/14 16:47:37 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/15 15:37:09 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ $(NAME) :	$(addprefix objs/, $(OBJS))
 			$(CC) $(CC_FLAGS) -o $(NAME) $(addprefix objs/, $(OBJS))
 
 objs/%.o:	srcs/%.c include/philo.h Makefile
-			$(CC) -c $(CC_FLAGS) $< -o $@
 			@mkdir -p objs
+			$(CC) -c $(CC_FLAGS) $< -o $@
 
 clean :
 		rm -rf objs
