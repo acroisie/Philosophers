@@ -6,11 +6,25 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/15 08:10:34 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 17:30:04 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n && (s1[i] || s2[i]))
+	{
+		if (s1[i] - s2[i] != 0)
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
 
 int	ft_atoi(char const *str)
 {
@@ -49,6 +63,32 @@ int	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+int	check_args(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		if (ft_strncmp(argv[i], "0", ft_strlen(argv[i]))
+			|| ft_strncmp(argv[i], "-1", ft_strlen(argv[i])))
+			if (ft_atoi(argv[i]) == 0 || ft_atoi(argv[i]) == (-1))
+				return (1);
+		if (argv[i][j] == '-')
+			j++;
+		while (argv[i][j])
+		{
+			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	ft_putendl_fd(char *s, int fd)
