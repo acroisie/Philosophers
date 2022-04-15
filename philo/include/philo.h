@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/14 16:50:59 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 08:08:57 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <pthread.h>
 
-char	*ft_itoa(int n);
+int		ft_atoi(char const *str);
 int		ft_strlen(const char *s);
 void	ft_putendl_fd(char *s, int fd);
 

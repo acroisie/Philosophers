@@ -6,59 +6,39 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/14 16:49:50 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 08:10:34 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static	int	num_len(long int num)
+int	ft_atoi(char const *str)
 {
-	int	count;
-
-	count = 0;
-	if (num == 0)
-		count++;
-	if (num < 0)
-	{
-		count++;
-		num = num * (-1);
-	}
-	while (num > 0)
-	{
-		num = num / 10;
-		count++;
-	}
-	return (count);
-}
-
-char	*ft_itoa(int n)
-{
-	int			len;
-	char		*str;
+	int			i;
 	int			sign;
-	long int	buff;
+	long int	result;
 
-	buff = n;
-	len = num_len(buff);
-	str = malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	str[len] = '\0';
-	sign = 0;
-	if (buff < 0)
+	i = 0;
+	sign = 1;
+	result = 0;
+	while ((str[i] >= 3 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = sign * -1;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		buff = buff * -1;
-		sign = -1;
+		result = result * 10 + (str[i++] - 48);
+		if ((result > 2147483647 && sign >= 0)
+			|| (result > 2147483648 && sign < 0))
+		{
+			if (sign >= 0)
+				return (-1);
+			else
+				return (0);
+		}
 	}
-	while ((--len) >= 0)
-	{
-		str[len] = (buff % 10) + 48;
-		buff = buff / 10;
-	}
-	if (sign < 0)
-		str[0] = '-';
-	return (str);
+	return (result * sign);
 }
 
 int	ft_strlen(const char *s)
