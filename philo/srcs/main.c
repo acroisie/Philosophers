@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:49:39 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/15 17:29:57 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 17:48:29 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc >= 4 && argc <= 5)
+	if (argc >= 5 && argc <= 6)
 	{
 		if (!check_args(argv))
 		{
-			ft_putendl_fd("OK", 1); // To delete
+			lets_philo(argv);
 			return (0);
 		}
 	}

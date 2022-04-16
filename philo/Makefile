@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/14 16:01:20 by acroisie          #+#    #+#              #
-#    Updated: 2022/04/15 15:37:09 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/15 17:47:00 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC_FLAGS = -Wall -Wextra -Werror
 NAME := philo
 
 SRCS := main.c \
-		philo_utils.c
+		philo_utils.c \
+		philo.c
 
 OBJS := $(SRCS:.c=.o)
 
