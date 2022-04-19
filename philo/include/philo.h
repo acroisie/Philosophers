@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/19 10:53:22 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 10:59:57 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int		ft_strlen(const char *s);
 int		ft_atoi(char const *str);
 void	ft_putendl_fd(char *s, int fd);
 int		check_args(char **argv);
-void	lets_philo(t_common *data, char **argv);
+int		lets_philo(t_common *data, char **argv);
 
 #endif

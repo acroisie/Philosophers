@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/19 10:54:37 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 11:06:07 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,20 @@ void	*ft_process(void *arg)
 	t_common	*data;
 
 	data = (t_common *) arg;
+	ft_putendl_fd("lets_philo", 1);
+	return ((void *)data);
 }
 
-void	lets_philo(t_common *data, char **argv)
+int	lets_philo(t_common *data, char **argv)
 {
 	int	i;
 
 	i = 0;
 	init_data(data, argv);
 	if (data->philo)
-		while (i < data->number_of_philosophers)
-			pthread_create(&data->philo->thread[i], NULL,
-				ft_process, data);
+		while (i++ < data->number_of_philosophers)
+			pthread_create(&data->philo->thread[i], NULL, ft_process, data);
 	else
 		return (1);
-	ft_putendl_fd("lets_philo", 1);
+	return (0);
 }
