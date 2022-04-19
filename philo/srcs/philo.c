@@ -6,36 +6,51 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/16 11:24:16 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 10:54:37 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-t_common	init_data(char **argv)
+void	init_data(t_common *data, char **argv)
 {
-	t_common	temp;
+	int	i;
 
-	temp.number_of_philosophers = ft_atoi(argv[1]);
-	temp.time_to_die = ft_atoi(argv[2]);
-	temp.time_to_eat = ft_atoi(argv[3]);
-	temp.time_to_sleep = ft_atoi(argv[4]);
+	i = 0;
+	data->number_of_philosophers = ft_atoi(argv[1]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5])
-		temp.number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
+		data->number_of_tepme = ft_atoi(argv[5]);
 	else
-		temp.number_of_times_each_philosopher_must_eat = 0;
-	return (temp);
+		data->number_of_tepme = 0;
+	data->philo = malloc(data->number_of_philosophers * sizeof(t_philo *));
+	if (data->philo)
+		while (i++ <= data->number_of_philosophers)
+			data->philo[i].right_fork = &data->philo[i + 1].left_fork;
+	else
+		free(data->philo);
 }
 
-void	lets_philo(char **argv)
+void	*ft_process(void *arg)
 {
-	t_common	data;
+	t_common	*data;
 
-	data = init_data(argv);
+	data = (t_common *) arg;
+}
+
+void	lets_philo(t_common *data, char **argv)
+{
+	int	i;
+
+	i = 0;
+	init_data(data, argv);
+	if (data->philo)
+		while (i < data->number_of_philosophers)
+			pthread_create(&data->philo->thread[i], NULL,
+				ft_process, data);
+	else
+		return (1);
 	ft_putendl_fd("lets_philo", 1);
-	printf("%i\n", data.number_of_philosophers);
-	printf("%i\n", data.time_to_die);
-	printf("%i\n", data.time_to_eat);
-	printf("%i\n", data.time_to_sleep);
-	printf("%i\n", data.number_of_times_each_philosopher_must_eat);
 }
