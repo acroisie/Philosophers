@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/14 16:01:20 by acroisie          #+#    #+#              #
-#    Updated: 2022/04/15 17:47:00 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/19 12:01:44 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS := $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) :	$(addprefix objs/, $(OBJS))
-			$(CC) $(CC_FLAGS) -o $(NAME) $(addprefix objs/, $(OBJS))
+			$(CC) $(CC_FLAGS) -o $(NAME) $(addprefix objs/, $(OBJS)) -g3 -fsanitize=address
 
 objs/%.o:	srcs/%.c include/philo.h Makefile
 			@mkdir -p objs

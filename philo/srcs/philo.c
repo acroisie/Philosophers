@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/19 11:06:07 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 13:43:56 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ int	lets_philo(t_common *data, char **argv)
 	i = 0;
 	init_data(data, argv);
 	if (data->philo)
-		while (i++ < data->number_of_philosophers)
-			pthread_create(&data->philo->thread[i], NULL, ft_process, data);
+		while (i < data->number_of_philosophers)
+			pthread_create(&data->philo[i++].thread, NULL, ft_process, data);
 	else
 		return (1);
+	/* Mutex_join */
 	return (0);
 }
