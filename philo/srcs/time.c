@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:51:57 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/20 11:32:59 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 14:15:40 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned int	ft_gettimme(void)
 
 void	ft_usleep(long int ms)
 {
-	long	start;
+	long int	start;
 
 	start = ft_gettimme();
 	while ((ft_gettimme() - start) < ms)

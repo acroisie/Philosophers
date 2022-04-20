@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/20 09:06:59 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 15:48:37 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,8 @@ int	ft_check_args(char **argv)
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
-	int	len;
-
 	if (!s)
 		return ;
-	i = 0;
-	len = ft_strlen(s);
-	while (i < len)
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
 }
