@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/20 09:37:46 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 12:49:40 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_init_data(t_common *data, char **argv)
 	{
 		while (i < data->nb_of_philos)
 		{
-			data->philo->id = i + 1;
-			if (data->philo->id < data->nb_of_philos)
+			data->philo[i].id = i + 1;
+			if (i + 1 < data->nb_of_philos)
 				data->philo[i].right_fork = &data->philo[i + 1].left_fork;
 			else
 				data->philo[i].right_fork = &data->philo[0].left_fork;
@@ -41,14 +41,14 @@ void	ft_init_data(t_common *data, char **argv)
 		free(data->philo);
 }
 
-/* Manger, penser, dormir */
-
 void	*ft_process(void *arg)
 {
 	t_common	*data;
 
 	data = (t_common *) arg;
-	ft_putendl_fd("lets_philo", 1);
+	if (data->philo->id % 2 == 0)
+		ft_eat();
+	while (ft_someone_is_dead())
 	return ((void *)data);
 }
 

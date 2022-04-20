@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/14 15:49:39 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/20 11:34:11 by acroisie         ###   ########lyon.fr   */
+/*   Created: 2022/04/20 10:51:57 by acroisie          #+#    #+#             */
+/*   Updated: 2022/04/20 11:32:59 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int argc, char **argv)
+unsigned int	ft_gettimme(void)
 {
-	t_common	data;
+	struct timeval	current_time;
 
-	if (argc >= 5 && argc <= 6)
-	{
-		if (!ft_check_args(argv))
-		{
-			if (ft_lets_philo(&data, argv))
-			{
-				ft_putendl_fd("Malloc error", 2);
-				return (1);
-			}
-			free(data.philo);
-			return (0);
-		}
-	}
-	ft_putendl_fd("Wrong arguments", 2);
-	return (1);
+	if (gettimeofday(&current_time, NULL) == -1)
+		return (1);
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
+}
+
+void	ft_usleep(long int ms)
+{
+	long	start;
+
+	start = ft_gettimme();
+	while ((ft_gettimme() - start) < ms)
+		usleep(10);
 }
