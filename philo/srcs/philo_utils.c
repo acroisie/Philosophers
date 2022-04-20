@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/16 11:46:00 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 09:06:59 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-int	check_args(char **argv)
+int	ft_check_args(char **argv)
 {
 	int	i;
 	int	j;
@@ -78,7 +78,7 @@ int	check_args(char **argv)
 			if (ft_strncmp(argv[i], "-1", ft_strlen(argv[i])))
 				if (ft_atoi(argv[i]) == 0 || ft_atoi(argv[i]) == (-1))
 					return (1);
-		if (argv[i][j] == '-' || argv[i][j] == '0')
+		if (argv[i][j] == '-' || (argv[i][j] == '0' && i != 5))
 			return (1);
 		while (argv[i][j])
 		{

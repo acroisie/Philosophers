@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/19 12:13:27 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 09:29:11 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 typedef struct s_philo
 {
+	int				id;
+	void			*common;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_t		thread;
@@ -26,18 +28,18 @@ typedef struct s_philo
 
 typedef struct s_common
 {
-	int		number_of_philosophers;
+	int		nb_of_philos;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
-	int		number_of_tepme;
+	int		nb_of_tepme;
 	t_philo	*philo;
 }t_common;
 
 int		ft_strlen(const char *s);
 int		ft_atoi(char const *str);
 void	ft_putendl_fd(char *s, int fd);
-int		check_args(char **argv);
-int		lets_philo(t_common *data, char **argv);
+int		ft_check_args(char **argv);
+int		ft_lets_philo(t_common *data, char **argv);
 
 #endif

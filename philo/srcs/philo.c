@@ -6,32 +6,42 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/19 13:43:56 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 09:37:46 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	init_data(t_common *data, char **argv)
+void	ft_init_data(t_common *data, char **argv)
 {
 	int	i;
 
 	i = 0;
-	data->number_of_philosophers = ft_atoi(argv[1]);
+	data->nb_of_philos = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
+	data->nb_of_tepme = 0;
 	if (argv[5])
-		data->number_of_tepme = ft_atoi(argv[5]);
-	else
-		data->number_of_tepme = 0;
-	data->philo = malloc(data->number_of_philosophers * sizeof(t_philo *));
+		data->nb_of_tepme = ft_atoi(argv[5]);
+	data->philo = malloc(data->nb_of_philos * sizeof(t_philo *));
 	if (data->philo)
-		while (i++ <= data->number_of_philosophers)
-			data->philo[i].right_fork = &data->philo[i + 1].left_fork;
+	{
+		while (i < data->nb_of_philos)
+		{
+			data->philo->id = i + 1;
+			if (data->philo->id < data->nb_of_philos)
+				data->philo[i].right_fork = &data->philo[i + 1].left_fork;
+			else
+				data->philo[i].right_fork = &data->philo[0].left_fork;
+			data->philo[i++].common = &data;
+		}
+	}
 	else
 		free(data->philo);
 }
+
+/* Manger, penser, dormir */
 
 void	*ft_process(void *arg)
 {
@@ -42,14 +52,14 @@ void	*ft_process(void *arg)
 	return ((void *)data);
 }
 
-int	lets_philo(t_common *data, char **argv)
+int	ft_lets_philo(t_common *data, char **argv)
 {
 	int	i;
 
 	i = 0;
-	init_data(data, argv);
+	ft_init_data(data, argv);
 	if (data->philo)
-		while (i < data->number_of_philosophers)
+		while (i < data->nb_of_philos)
 			pthread_create(&data->philo[i++].thread, NULL, ft_process, data);
 	else
 		return (1);
