@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:49:39 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/20 15:57:44 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 10:04:23 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	main(int argc, char **argv)
 		{
 			if (ft_lets_philo(&data, argv))
 			{
-				ft_putendl_fd("Malloc error", 2);
+				printf("Malloc error\n");
 				return (1);
 			}
 			free(data.philo);
 			return (0);
 		}
 	}
-	ft_putendl_fd("Wrong arguments", 2);
+	printf("Wrong arguments\n");
 	return (1);
 }

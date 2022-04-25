@@ -6,13 +6,13 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/20 16:52:34 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 10:16:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-# include <stdio.h> // To delete
+# include <stdio.h>
 # include <sys/time.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -20,11 +20,15 @@
 
 typedef struct s_philo
 {
-	int				id;
-	void			*common;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_t		thread;
+	int				id;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				nb_of_tepme;
+	unsigned int	last_lunch;
 }t_philo;
 
 typedef struct s_common
@@ -41,8 +45,8 @@ void			ft_usleep(long int ms);
 unsigned int	ft_gettimme(void);
 int				ft_strlen(const char *s);
 int				ft_atoi(char const *str);
-void			ft_putendl_fd(char *s, int fd);
 int				ft_check_args(char **argv);
 int				ft_lets_philo(t_common *data, char **argv);
+void			ft_init_data(t_common *data, char **argv);
 
 #endif

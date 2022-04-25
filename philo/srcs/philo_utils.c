@@ -6,11 +6,21 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/20 15:48:37 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 10:05:49 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+int	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -55,16 +65,6 @@ int	ft_atoi(char const *str)
 	return (result * sign);
 }
 
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 int	ft_check_args(char **argv)
 {
 	int	i;
@@ -89,12 +89,4 @@ int	ft_check_args(char **argv)
 		i++;
 	}
 	return (0);
-}
-
-void	ft_putendl_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
-	write(fd, "\n", 1);
 }
