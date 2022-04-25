@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/21 10:16:22 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 10:22:55 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_philo
 {
+	void			*print_msg;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_t		thread;
@@ -33,12 +34,13 @@ typedef struct s_philo
 
 typedef struct s_common
 {
-	int		nb_of_philos;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		nb_of_tepme;
-	t_philo	*philo;
+	pthread_mutex_t	print_msg;
+	int				nb_of_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				nb_of_tepme;
+	t_philo			*philo;
 }t_common;
 
 void			ft_usleep(long int ms);

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:07:22 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/21 10:10:21 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 09:47:58 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void	ft_init_mutex(t_common *data)
 	int	i;
 
 	i = 0;
+	pthread_mutex_init(&data->print_msg, NULL);
 	while (i < data->nb_of_philos)
-		pthread_mutex_init(&data->philo[i++].left_fork, NULL);
+	{
+		pthread_mutex_init(&data->philo[i].left_fork, NULL);
+		data->philo[i].print_msg = &data->print_msg;
+		i++;
+	}
 }
 
-void	ft_init_data(t_common *data, char **argv)
+void	ft_fill_data(t_common *data, char **argv)
 {
-	int	i;
-
-	i = 0;
-	ft_init_mutex(data);
 	data->nb_of_philos = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
@@ -42,6 +43,14 @@ void	ft_init_data(t_common *data, char **argv)
 	data->nb_of_tepme = 0;
 	if (argv[5])
 		data->nb_of_tepme = ft_atoi(argv[5]);
+}
+
+void	ft_init_data(t_common *data, char **argv)
+{
+	int	i;
+
+	i = 0;
+	ft_fill_data(data, argv);
 	data->philo = malloc(data->nb_of_philos * sizeof(t_philo *));
 	if (data->philo)
 	{
@@ -54,6 +63,7 @@ void	ft_init_data(t_common *data, char **argv)
 				data->philo[i].right_fork = &data->philo[0].left_fork;
 			ft_copy_time(data, &data->philo[i++]);
 		}
+		ft_init_mutex(data);
 	}
 	else
 		free(data->philo);
