@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/25 10:58:52 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 21:39:04 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,34 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
+void	ft_think(t_philo *philo)
+{
+	
+}
+
 void	*ft_philo_birth(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	if (!(philo->id % 2))
-		ft_eat(philo);
-	// else
-	// {
-	// 	/* MANGER DORMIR PENSER */
-	// 	while (1)
-	// 	{
-	// 		ft_think(philo);
-	// 		ft_eat(philo);
-	// 		ft_sleep(philo);
-	// 	}
-	// }
+	{
+		while (1)
+		{
+			ft_eat(philo);
+			ft_sleep(philo);
+			ft_think(philo);
+		}
+	}
+	else
+	{
+		while (1)
+		{
+			ft_think(philo);
+			ft_eat(philo);
+			ft_sleep(philo);
+		}
+	}
 	return ((void *)philo);
 }
 
