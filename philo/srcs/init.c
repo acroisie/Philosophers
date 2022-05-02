@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:07:22 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/25 09:47:58 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 12:13:38 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void	ft_init_mutex(t_common *data)
 	pthread_mutex_init(&data->print_msg, NULL);
 	while (i < data->nb_of_philos)
 	{
+		data->philo[i].id = i + 1;
 		pthread_mutex_init(&data->philo[i].left_fork, NULL);
 		data->philo[i].print_msg = &data->print_msg;
+		data->philo[i].lfork_st = 1;
 		i++;
 	}
 }
@@ -56,11 +58,16 @@ void	ft_init_data(t_common *data, char **argv)
 	{
 		while (i < data->nb_of_philos)
 		{
-			data->philo[i].id = i + 1;
 			if (i + 1 < data->nb_of_philos)
+			{
 				data->philo[i].right_fork = &data->philo[i + 1].left_fork;
-			else
+				data->philo[i].rfork_st = &data->philo[i + 1].lfork_st;
+			}
+			else if (data->nb_of_philos > 1)
+			{
 				data->philo[i].right_fork = &data->philo[0].left_fork;
+				data->philo[i].rfork_st = &data->philo[i + 1].lfork_st;
+			}
 			ft_copy_time(data, &data->philo[i++]);
 		}
 		ft_init_mutex(data);

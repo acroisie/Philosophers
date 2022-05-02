@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:51:57 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/25 10:23:04 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 17:30:05 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ unsigned int	ft_gettimme(void)
 
 	if (gettimeofday(&current_time, NULL) == -1)
 		return (1);
-	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
+	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
 }
 
 void	ft_usleep(long int ms)
 {
-	long int	start;
+	unsigned int	start;
 
 	start = ft_gettimme();
 	while ((ft_gettimme() - start) < ms)

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/21 10:05:49 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 17:33:00 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,37 @@ int	ft_atoi(char const *str)
 		}
 	}
 	return (result * sign);
+}
+
+void	ft_print_msg(t_philo *philo, int msg_id)
+{
+	long	tmp;
+
+	tmp = ft_gettimme();
+	if (msg_id == 1)
+	{
+		pthread_mutex_lock(philo->print_msg);
+		printf("%ld %d has taken a fork\n",  tmp, philo->id);
+		pthread_mutex_unlock(philo->print_msg);
+	}
+	if (msg_id == 2)
+	{
+		pthread_mutex_lock(philo->print_msg);
+		printf("%ld %d is eating\n", tmp, philo->id);
+		pthread_mutex_unlock(philo->print_msg);
+	}
+	if (msg_id == 3)
+	{
+		pthread_mutex_lock(philo->print_msg);
+		printf("%ld %d is sleeping\n", tmp, philo->id);
+		pthread_mutex_unlock(philo->print_msg);
+	}
+	if (msg_id == 4)
+	{
+		pthread_mutex_lock(philo->print_msg);
+		printf("%ld %d is thinking\n", tmp, philo->id);
+		pthread_mutex_unlock(philo->print_msg);
+	}
 }
 
 int	ft_check_args(char **argv)

@@ -6,13 +6,13 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/14 16:01:20 by acroisie          #+#    #+#              #
-#    Updated: 2022/04/21 10:07:14 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/05/02 15:24:35 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CC_FLAGS = -Wall -Wextra -Werror
+CC_FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
 
 NAME := philo
 

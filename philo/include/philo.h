@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/25 10:22:55 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 17:21:38 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 
 typedef struct s_philo
 {
+	long int		time_stamp;
 	void			*print_msg;
 	pthread_mutex_t	left_fork;
-	pthread_mutex_t	*right_fork;
+	void			*right_fork;
+	int				lfork_st;
+	int				*rfork_st;
 	pthread_t		thread;
 	int				id;
 	int				time_to_die;
@@ -47,6 +50,7 @@ void			ft_usleep(long int ms);
 unsigned int	ft_gettimme(void);
 int				ft_strlen(const char *s);
 int				ft_atoi(char const *str);
+void			ft_print_msg(t_philo *philo, int msg_id);
 int				ft_check_args(char **argv);
 int				ft_lets_philo(t_common *data, char **argv);
 void			ft_init_data(t_common *data, char **argv);
