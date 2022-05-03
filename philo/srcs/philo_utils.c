@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/02 17:33:00 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 15:32:35 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,31 +69,19 @@ void	ft_print_msg(t_philo *philo, int msg_id)
 {
 	long	tmp;
 
-	tmp = ft_gettimme();
+	tmp = ft_gettimme() - philo->time_stamp;
+	pthread_mutex_lock(philo->print_msg);
 	if (msg_id == 1)
-	{
-		pthread_mutex_lock(philo->print_msg);
-		printf("%ld %d has taken a fork\n",  tmp, philo->id);
-		pthread_mutex_unlock(philo->print_msg);
-	}
-	if (msg_id == 2)
-	{
-		pthread_mutex_lock(philo->print_msg);
+		printf("%ld %d has taken a fork\n", tmp, philo->id);
+	else if (msg_id == 2)
 		printf("%ld %d is eating\n", tmp, philo->id);
-		pthread_mutex_unlock(philo->print_msg);
-	}
-	if (msg_id == 3)
-	{
-		pthread_mutex_lock(philo->print_msg);
+	else if (msg_id == 3)
 		printf("%ld %d is sleeping\n", tmp, philo->id);
-		pthread_mutex_unlock(philo->print_msg);
-	}
-	if (msg_id == 4)
-	{
-		pthread_mutex_lock(philo->print_msg);
+	else if (msg_id == 4)
 		printf("%ld %d is thinking\n", tmp, philo->id);
-		pthread_mutex_unlock(philo->print_msg);
-	}
+	else if (msg_id == 5)
+		printf("%ld %d is dead\n", tmp, philo->id);
+	pthread_mutex_unlock(philo->print_msg);
 }
 
 int	ft_check_args(char **argv)

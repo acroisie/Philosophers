@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/02 17:21:38 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 14:46:41 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	int				time_to_sleep;
 	int				nb_of_tepme;
 	unsigned int	last_lunch;
+	unsigned int	nb_lunch;
 }t_philo;
 
 typedef struct s_common

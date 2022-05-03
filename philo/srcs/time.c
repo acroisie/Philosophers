@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:51:57 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/02 17:30:05 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 11:00:18 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	ft_usleep(long int ms)
 
 	start = ft_gettimme();
 	while ((ft_gettimme() - start) < ms)
-		usleep(10);
+		usleep(20);
 }
