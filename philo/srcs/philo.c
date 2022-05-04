@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/04 17:36:50 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 17:42:10 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_end_check(t_common *data)
 			if (temp >= (unsigned int)data->time_to_die)
 			{
 				ft_print_msg(&data->philo[i], 5);
-				pthread_mutex_lock(&data->philo[i].mthe_glorious_dead);
+				pthread_mutex_lock(&data->philo[i].mthe_glorious_dead); // Mutex to doble
 				data->the_glorious_dead = 1;
 				pthread_mutex_unlock(&data->philo[i].mthe_glorious_dead);
 				break ;
