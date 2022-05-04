@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/04 13:31:44 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 14:06:45 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,19 @@ void	*ft_philo_birth(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	pthread_mutex_lock(&philo->mlast_lunch);
 	philo->last_lunch = ft_gettime();
+	pthread_mutex_unlock(&philo->mlast_lunch);
+	pthread_mutex_lock(&philo->mtime_stamp);
 	philo->time_stamp = ft_gettime();
+	pthread_mutex_unlock(&philo->mtime_stamp);
 	philo->nb_lunch = 0;
 	if (philo->id % 2)
 	{
 		ft_print_msg(philo, 4);
 		ft_usleep(philo->time_to_eat / 3);
 	}
-	while (1) //!dead
+	while (1)
 	{
 		ft_eat(philo);
 		ft_print_msg(philo, 3);
@@ -61,7 +65,7 @@ void	ft_end_check(t_common *data)
 	unsigned int	temp;
 
 	ft_usleep(data->time_to_eat / 3);
-	while (1)
+	while (!data->the_glorious_dead)
 	{
 		i = 0;
 		while (i < data->nb_of_philos)
@@ -72,8 +76,9 @@ void	ft_end_check(t_common *data)
 			pthread_mutex_unlock(&data->philo[i].mlast_lunch);
 			if (temp >= (unsigned int)data->time_to_die)
 			{
+				data->the_glorious_dead = 1;
 				ft_print_msg(&data->philo[i], 5);
-				exit (30);
+				break ;
 			}
 			i++;
 		}
