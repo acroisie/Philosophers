@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/03 15:43:21 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 13:31:44 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(philo->right_fork);
 	*philo->rfork_st = 0;
 	ft_print_msg(philo, 1);
-	// philo->last_lunch = ft_gettimme();
+	pthread_mutex_lock(&philo->mlast_lunch);
+	philo->last_lunch = ft_gettime();
+	pthread_mutex_unlock(&philo->mlast_lunch);
 	philo->nb_lunch++;
 	ft_print_msg(philo, 2);
 	ft_usleep(philo->time_to_eat);
@@ -35,14 +37,15 @@ void	*ft_philo_birth(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->time_stamp = ft_gettimme();
+	philo->last_lunch = ft_gettime();
+	philo->time_stamp = ft_gettime();
 	philo->nb_lunch = 0;
 	if (philo->id % 2)
 	{
 		ft_print_msg(philo, 4);
-		ft_usleep(philo->time_to_eat / 3); // Modify for specific case
+		ft_usleep(philo->time_to_eat / 3);
 	}
-	while (1) // !dead
+	while (1) //!dead
 	{
 		ft_eat(philo);
 		ft_print_msg(philo, 3);
@@ -54,20 +57,24 @@ void	*ft_philo_birth(void *arg)
 
 void	ft_end_check(t_common *data)
 {
-	int		i;
-	long	temp;
+	int				i;
+	unsigned int	temp;
 
-	while (1) // !dead
+	ft_usleep(data->time_to_eat / 3);
+	while (1)
 	{
 		i = 0;
 		while (i < data->nb_of_philos)
 		{
-			temp = ft_gettimme() - data->philo[i].last_lunch;
-			// if (temp >= data->time_to_die)
-			// {
-			// 	// ft_print_msg(&data->philo[i], 5);
-			// 	// exit (30);
-			// }
+			pthread_mutex_lock(&data->philo[i].mlast_lunch);
+			if (data->philo[i].last_lunch != 0)
+				temp = ft_gettime() - data->philo[i].last_lunch;
+			pthread_mutex_unlock(&data->philo[i].mlast_lunch);
+			if (temp >= (unsigned int)data->time_to_die)
+			{
+				ft_print_msg(&data->philo[i], 5);
+				exit (30);
+			}
 			i++;
 		}
 	}
