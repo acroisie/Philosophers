@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/04 13:23:11 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 17:36:36 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,24 @@ void	ft_print_msg(t_philo *philo, int msg_id)
 {
 	unsigned int	tmp;
 
-	pthread_mutex_lock(&philo->mtime_stamp);
-	tmp = ft_gettime() - (unsigned int)philo->time_stamp;
-	pthread_mutex_unlock(&philo->mtime_stamp);
-	pthread_mutex_lock(philo->print_msg);
-	if (msg_id == 1)
-		printf("%u %d has taken a fork\n", tmp, philo->id);
-	else if (msg_id == 2)
-		printf("%u %d is eating\n", tmp, philo->id);
-	else if (msg_id == 3)
-		printf("%u %d is sleeping\n", tmp, philo->id);
-	else if (msg_id == 4)
-		printf("%u %d is thinking\n", tmp, philo->id);
-	else if (msg_id == 5)
-		printf("%u %d died\n", tmp, philo->id);
-	pthread_mutex_unlock(philo->print_msg);
+	if (!ft_the_glorious_dead(philo))
+	{
+		pthread_mutex_lock(&philo->mtime_stamp);
+		tmp = ft_gettime() - (unsigned int)philo->time_stamp;
+		pthread_mutex_unlock(&philo->mtime_stamp);
+		pthread_mutex_lock(philo->print_msg);
+		if (msg_id == 1)
+			printf("%u %d has taken a fork\n", tmp, philo->id);
+		else if (msg_id == 2)
+			printf("%u %d is eating\n", tmp, philo->id);
+		else if (msg_id == 3)
+			printf("%u %d is sleeping\n", tmp, philo->id);
+		else if (msg_id == 4)
+			printf("%u %d is thinking\n", tmp, philo->id);
+		else if (msg_id == 5)
+			printf("%u %d died\n", tmp, philo->id);
+		pthread_mutex_unlock(philo->print_msg);
+	}
 }
 
 int	ft_check_args(char **argv)

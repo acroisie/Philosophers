@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:49:39 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/21 10:04:23 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 17:09:14 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	main(int argc, char **argv)
 {
 	t_common	data;
+	int			i;
 
+	i = 0;
 	if (argc >= 5 && argc <= 6)
 	{
 		if (!ft_check_args(argv))
