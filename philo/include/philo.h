@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/05 17:13:47 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:36:39 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_philo
 {
-	unsigned int	time_stamp;
+	uint64_t		time_stamp;
 	pthread_mutex_t	mtime_stamp;
 	pthread_mutex_t	mlast_lunch;
 	pthread_mutex_t	left_fork;
@@ -36,8 +36,8 @@ typedef struct s_philo
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_of_tepme;
-	unsigned int	last_lunch;
-	unsigned int	nb_lunch;
+	uint64_t		last_lunch;
+	uint64_t		nb_lunch;
 }t_philo;
 
 typedef struct s_common

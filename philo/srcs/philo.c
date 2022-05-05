@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/05 17:32:41 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:41:32 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	*ft_philo_birth(void *arg)
 		ft_eat(philo);
 		ft_print_msg(philo, 3);
 		ft_usleep(philo->time_to_sleep);
-		usleep(20);
 		ft_print_msg(philo, 4);
 	}
 	return ((void *)philo);
@@ -75,7 +74,7 @@ void	*ft_philo_birth(void *arg)
 void	ft_end_check(t_common *data)
 {
 	int				i;
-	unsigned int	temp;
+	uint64_t		temp;
 
 	ft_usleep(data->time_to_eat / 3);
 	while (!data->the_glorious_dead)
@@ -87,7 +86,7 @@ void	ft_end_check(t_common *data)
 			if (data->philo[i].last_lunch != 0)
 				temp = ft_gettime() - data->philo[i].last_lunch;
 			pthread_mutex_unlock(&data->philo[i].mlast_lunch);
-			if (temp >= (unsigned int)data->time_to_die)
+			if (temp >= (uint64_t)data->time_to_die)
 			{
 				ft_print_msg(&data->philo[i], 5);
 				pthread_mutex_lock(data->philo->mthe_glorious_dead);
