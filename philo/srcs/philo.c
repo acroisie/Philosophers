@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/04 17:42:10 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 08:14:05 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	ft_eat(t_philo *philo)
 
 int	ft_the_glorious_dead(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->mthe_glorious_dead);
+	pthread_mutex_lock(philo->mthe_glorious_dead);
 	if (*philo->the_glorious_dead)
 	{
-		pthread_mutex_unlock(&philo->mthe_glorious_dead);
+		pthread_mutex_unlock(philo->mthe_glorious_dead);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->mthe_glorious_dead);
+	pthread_mutex_unlock(philo->mthe_glorious_dead);
 	return (0);
 }
 
@@ -89,9 +89,9 @@ void	ft_end_check(t_common *data)
 			if (temp >= (unsigned int)data->time_to_die)
 			{
 				ft_print_msg(&data->philo[i], 5);
-				pthread_mutex_lock(&data->philo[i].mthe_glorious_dead); // Mutex to doble
+				pthread_mutex_lock(data->philo->mthe_glorious_dead);
 				data->the_glorious_dead = 1;
-				pthread_mutex_unlock(&data->philo[i].mthe_glorious_dead);
+				pthread_mutex_unlock(data->philo[i].mthe_glorious_dead);
 				break ;
 			}
 			i++;

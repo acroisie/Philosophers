@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/04 17:16:24 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 08:12:03 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_philo
 	pthread_mutex_t	mtime_stamp;
 	pthread_mutex_t	mlast_lunch;
 	pthread_mutex_t	left_fork;
-	pthread_mutex_t	mthe_glorious_dead;
+	void			*mthe_glorious_dead;
 	void			*right_fork;
 	void			*print_msg;
 	int				lfork_st;
@@ -43,6 +43,7 @@ typedef struct s_philo
 typedef struct s_common
 {
 	pthread_mutex_t	print_msg;
+	pthread_mutex_t	mthe_glorious_dead;
 	int				the_glorious_dead;
 	int				nb_of_philos;
 	int				time_to_die;
