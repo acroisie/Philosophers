@@ -6,13 +6,13 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:51:57 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/04 13:16:26 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:13:12 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-unsigned int	ft_gettime(void)
+uint64_t	ft_gettime(void)
 {
 	struct timeval	current_time;
 
@@ -21,9 +21,9 @@ unsigned int	ft_gettime(void)
 	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
 }
 
-void	ft_usleep(long int ms)
+void	ft_usleep(uint64_t ms)
 {
-	unsigned int	start;
+	uint64_t	start;
 
 	start = ft_gettime();
 	while ((ft_gettime() - start) < ms)

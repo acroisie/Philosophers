@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/05 08:14:05 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:32:41 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	ft_eat(t_philo *philo)
 	philo->nb_lunch++;
 	ft_print_msg(philo, 2);
 	ft_usleep(philo->time_to_eat);
-	*philo->rfork_st = 1;
-	pthread_mutex_unlock(philo->right_fork);
 	philo->lfork_st = 1;
 	pthread_mutex_unlock(&philo->left_fork);
+	*philo->rfork_st = 1;
+	pthread_mutex_unlock(philo->right_fork);
 }
 
 int	ft_the_glorious_dead(t_philo *philo)
@@ -66,6 +66,7 @@ void	*ft_philo_birth(void *arg)
 		ft_eat(philo);
 		ft_print_msg(philo, 3);
 		ft_usleep(philo->time_to_sleep);
+		usleep(20);
 		ft_print_msg(philo, 4);
 	}
 	return ((void *)philo);

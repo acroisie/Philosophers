@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/05 08:12:03 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:13:47 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_common
 	t_philo			*philo;
 }t_common;
 
-void			ft_usleep(long int ms);
-unsigned int	ft_gettime(void);
+void			ft_usleep(uint64_t ms);
+uint64_t		ft_gettime(void);
 int				ft_strlen(const char *s);
 int				ft_atoi(char const *str);
 void			ft_print_msg(t_philo *philo, int msg_id);
