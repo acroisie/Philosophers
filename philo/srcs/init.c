@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:07:22 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/05 08:13:11 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 17:38:29 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_init_mutex(t_common *data)
 		pthread_mutex_init(&data->philo[i].left_fork, NULL);
 		pthread_mutex_init(&data->philo[i].mtime_stamp, NULL);
 		pthread_mutex_init(&data->philo[i].mlast_lunch, NULL);
+		pthread_mutex_init(&data->philo[i].mnb_lunch, NULL);
 		data->philo[i].print_msg = &data->print_msg;
 		data->philo[i].mthe_glorious_dead = &data->mthe_glorious_dead;
 		data->philo[i].the_glorious_dead = &data->the_glorious_dead;
@@ -59,7 +60,8 @@ void	ft_init_data(t_common *data, char **argv)
 
 	i = 0;
 	ft_fill_data(data, argv);
-	data->philo = malloc(data->nb_of_philos * sizeof(t_philo *));
+	data->philo = calloc(data->nb_of_philos, sizeof(t_philo *));
+	dprintf(2, "\n\nDEBUG %p\n\n", &data->philo[i].right_fork);
 	if (data->philo)
 	{
 		while (i < data->nb_of_philos)
