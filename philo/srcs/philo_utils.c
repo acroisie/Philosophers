@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/05 17:36:06 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 10:06:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,14 @@ void	ft_print_msg(t_philo *philo, int msg_id)
 {
 	uint64_t	tmp;
 
-	if (!ft_the_glorious_dead(philo))
+	if (msg_id == 5)
+	{
+		pthread_mutex_lock(&philo->mtime_stamp);
+		tmp = ft_gettime() - (uint64_t)philo->time_stamp;
+		pthread_mutex_unlock(&philo->mtime_stamp);
+		printf("%llu %d died\n", tmp, philo->id);
+	}
+	else if (!ft_the_glorious_dead(philo))
 	{
 		pthread_mutex_lock(&philo->mtime_stamp);
 		tmp = ft_gettime() - (uint64_t)philo->time_stamp;
@@ -83,8 +90,6 @@ void	ft_print_msg(t_philo *philo, int msg_id)
 			printf("%llu %d is sleeping\n", tmp, philo->id);
 		else if (msg_id == 4)
 			printf("%llu %d is thinking\n", tmp, philo->id);
-		else if (msg_id == 5)
-			printf("%llu %d died\n", tmp, philo->id);
 		pthread_mutex_unlock(philo->print_msg);
 	}
 }
