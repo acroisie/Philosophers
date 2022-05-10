@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/10 10:29:15 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 15:26:49 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,8 @@ int				ft_check_args(char **argv);
 int				ft_lets_philo(t_common *data, char **argv);
 void			ft_init_data(t_common *data, char **argv);
 int				ft_the_glorious_dead(t_philo *philo);
+void			ft_destroy_mutex(t_common *data);
+int				ft_the_glorious_dead(t_philo *philo);
+void			ft_set_death(t_common *data, int i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:56:43 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/10 13:40:06 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 14:28:46 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,40 +65,6 @@ int	ft_atoi(char const *str)
 	return (result * sign);
 }
 
-void	ft_print_msg(t_philo *philo, int msg_id)
-{
-	uint64_t	tmp;
-
-	if (msg_id == 5)
-	{
-		pthread_mutex_lock(philo->print_msg);
-		pthread_mutex_lock(&philo->mtime_stamp);
-		tmp = ft_gettime() - (uint64_t)philo->time_stamp;
-		pthread_mutex_unlock(&philo->mtime_stamp);
-		printf("%llu %d died\n", tmp, philo->id);
-		pthread_mutex_unlock(philo->print_msg);
-	}
-	else if (!ft_the_glorious_dead(philo))
-	{
-		pthread_mutex_lock(philo->print_msg);
-		if (!ft_the_glorious_dead(philo))
-		{
-			pthread_mutex_lock(&philo->mtime_stamp);
-			tmp = ft_gettime() - (uint64_t)philo->time_stamp;
-			pthread_mutex_unlock(&philo->mtime_stamp);
-			if (msg_id == 1)
-				printf("%llu %d has taken a fork\n", tmp, philo->id);
-			else if (msg_id == 2)
-				printf("%llu %d is eating\n", tmp, philo->id);
-			else if (msg_id == 3)
-				printf("%llu %d is sleeping\n", tmp, philo->id);
-			else if (msg_id == 4)
-				printf("%llu %d is thinking\n", tmp, philo->id);
-		}
-		pthread_mutex_unlock(philo->print_msg);
-	}
-}
-
 int	ft_check_args(char **argv)
 {
 	int	i;
@@ -112,7 +78,7 @@ int	ft_check_args(char **argv)
 			if (ft_strncmp(argv[i], "-1", ft_strlen(argv[i])))
 				if (ft_atoi(argv[i]) == 0 || ft_atoi(argv[i]) == (-1))
 					return (1);
-		if (argv[i][j] == '-' || (argv[i][j] == '0' && i != 5))
+		if (argv[i][j] == '-' || argv[i][j] == '0' )
 			return (1);
 		while (argv[i][j])
 		{
@@ -122,5 +88,17 @@ int	ft_check_args(char **argv)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	ft_the_glorious_dead(t_philo *philo)
+{
+	pthread_mutex_lock(philo->mthe_glorious_dead);
+	if (*philo->the_glorious_dead)
+	{
+		pthread_mutex_unlock(philo->mthe_glorious_dead);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->mthe_glorious_dead);
 	return (0);
 }

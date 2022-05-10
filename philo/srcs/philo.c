@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/10 13:36:53 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 15:26:06 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ void	ft_eat(t_philo *philo)
 		ft_usleep(philo->time_to_die);
 }
 
-int	ft_the_glorious_dead(t_philo *philo)
-{
-	pthread_mutex_lock(philo->mthe_glorious_dead);
-	if (*philo->the_glorious_dead)
-	{
-		pthread_mutex_unlock(philo->mthe_glorious_dead);
-		return (1);
-	}
-	pthread_mutex_unlock(philo->mthe_glorious_dead);
-	return (0);
-}
-
 void	*ft_philo_birth(void *arg)
 {
 	t_philo	*philo;
@@ -74,10 +62,25 @@ void	*ft_philo_birth(void *arg)
 	{
 		ft_eat(philo);
 		ft_print_msg(philo, 3);
-		ft_usleep(philo->time_to_sleep + 10);
+		ft_usleep(philo->time_to_sleep);
 		ft_print_msg(philo, 4);
 	}
 	return ((void *)philo);
+}
+
+int	ft_check_tepme(t_common *data, int i)
+{
+	pthread_mutex_lock(&data->philo[i].mnb_lunch);
+	if (data->philo[i].nb_lunch > data->nb_of_tepme)
+	{
+		pthread_mutex_lock(data->philo->mthe_glorious_dead);
+		data->the_glorious_dead = 1;
+		pthread_mutex_unlock(data->philo[i].mthe_glorious_dead);
+		pthread_mutex_unlock(&data->philo[i].mnb_lunch);
+		return (1);
+	}
+	pthread_mutex_unlock(&data->philo[i].mnb_lunch);
+	return (0);
 }
 
 void	ft_end_check(t_common *data)
@@ -97,24 +100,11 @@ void	ft_end_check(t_common *data)
 				temp = ft_gettime() - data->philo[i].last_lunch;
 			pthread_mutex_unlock(&data->philo[i].mlast_lunch);
 			if (data->nb_of_tepme)
-			{
-				pthread_mutex_lock(&data->philo[i].mnb_lunch);
-				if (data->philo[i].nb_lunch > data->nb_of_tepme)
-				{
-					pthread_mutex_lock(data->philo->mthe_glorious_dead);
-					data->the_glorious_dead = 1;
-					pthread_mutex_unlock(data->philo[i].mthe_glorious_dead);
-					pthread_mutex_unlock(&data->philo[i].mnb_lunch);
+				if (ft_check_tepme(data, i))
 					break ;
-				}
-				pthread_mutex_unlock(&data->philo[i].mnb_lunch);
-			}
 			if (temp >= (uint64_t)data->time_to_die)
 			{
-				pthread_mutex_lock(data->philo->mthe_glorious_dead);
-				data->the_glorious_dead = 1;
-				pthread_mutex_unlock(data->philo[i].mthe_glorious_dead);
-				ft_print_msg(&data->philo[i], 5);
+				ft_set_death(data, i);
 				break ;
 			}
 			i++;
@@ -143,7 +133,7 @@ int	ft_lets_philo(t_common *data, char **argv)
 			pthread_join(data->philo[i].thread, NULL);
 			i++;
 		}
-		/* Mutex_destroy */
+		ft_destroy_mutex(data);
 	}
 	else
 		return (1);

@@ -6,13 +6,13 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/14 16:01:20 by acroisie          #+#    #+#              #
-#    Updated: 2022/05/10 13:28:53 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/05/10 14:00:26 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CC_FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address #-g3 -fsanitize=thread 
+CC_FLAGS = -Wall -Wextra -Werror
 
 NAME := philo
 
@@ -20,6 +20,7 @@ SRCS := init.c \
 		main.c \
 		philo_utils.c \
 		philo.c \
+		print.c \
 		time.c
 
 OBJS := $(SRCS:.c=.o)

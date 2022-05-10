@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:07:22 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/10 10:29:32 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 13:50:06 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,23 @@ void	ft_init_mutex(t_common *data)
 		data->philo[i].mthe_glorious_dead = &data->mthe_glorious_dead;
 		data->philo[i].the_glorious_dead = &data->the_glorious_dead;
 		data->philo[i].lfork_st = 1;
+		i++;
+	}
+}
+
+void	ft_destroy_mutex(t_common *data)
+{
+	int	i;
+
+	i = 0;
+	pthread_mutex_destroy(&data->print_msg);
+	pthread_mutex_destroy(&data->mthe_glorious_dead);
+	while (i < data->nb_of_philos)
+	{
+		pthread_mutex_destroy(&data->philo[i].left_fork);
+		pthread_mutex_destroy(&data->philo[i].mtime_stamp);
+		pthread_mutex_destroy(&data->philo[i].mlast_lunch);
+		pthread_mutex_destroy(&data->philo[i].mnb_lunch);
 		i++;
 	}
 }
