@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:07:22 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/09 17:38:29 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 09:52:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	ft_init_data(t_common *data, char **argv)
 
 	i = 0;
 	ft_fill_data(data, argv);
-	data->philo = calloc(data->nb_of_philos, sizeof(t_philo *));
-	dprintf(2, "\n\nDEBUG %p\n\n", &data->philo[i].right_fork);
+	data->philo = malloc(data->nb_of_philos * sizeof(t_philo));
 	if (data->philo)
 	{
 		while (i < data->nb_of_philos)
@@ -74,7 +73,7 @@ void	ft_init_data(t_common *data, char **argv)
 			else if (data->nb_of_philos > 1)
 			{
 				data->philo[i].right_fork = &data->philo[0].left_fork;
-				data->philo[i].rfork_st = &data->philo[i + 1].lfork_st;
+				data->philo[i].rfork_st = &data->philo[0].lfork_st;
 			}
 			ft_copy_time(data, &data->philo[i++]);
 		}
