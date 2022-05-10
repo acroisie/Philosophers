@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/10 15:26:06 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 15:51:16 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	ft_eat(t_philo *philo)
 		pthread_mutex_lock(&philo->mlast_lunch);
 		philo->last_lunch = ft_gettime();
 		pthread_mutex_unlock(&philo->mlast_lunch);
-		pthread_mutex_lock(&philo->mnb_lunch);
-		philo->nb_lunch++;
-		pthread_mutex_unlock(&philo->mnb_lunch);
 		ft_print_msg(philo, 2);
 		ft_usleep(philo->time_to_eat);
 		philo->lfork_st = 1;
 		pthread_mutex_unlock(&philo->left_fork);
 		*philo->rfork_st = 1;
 		pthread_mutex_unlock(philo->right_fork);
+		pthread_mutex_lock(&philo->mnb_lunch);
+		philo->nb_lunch++;
+		pthread_mutex_unlock(&philo->mnb_lunch);
 	}
 	else
 		ft_usleep(philo->time_to_die);
