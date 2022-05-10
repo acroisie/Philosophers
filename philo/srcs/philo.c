@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 17:41:54 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/10 09:43:57 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 10:32:56 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,26 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->left_fork);
 	philo->lfork_st = 0;
 	ft_print_msg(philo, 1);
-	pthread_mutex_lock(philo->right_fork);
-	*philo->rfork_st = 0;
-	ft_print_msg(philo, 1);
-	pthread_mutex_lock(&philo->mlast_lunch);
-	philo->last_lunch = ft_gettime();
-	pthread_mutex_unlock(&philo->mlast_lunch);
-	pthread_mutex_lock(&philo->mnb_lunch);
-	philo->nb_lunch++;
-	pthread_mutex_unlock(&philo->mnb_lunch);
-	ft_print_msg(philo, 2);
-	ft_usleep(philo->time_to_eat);
-	philo->lfork_st = 1;
-	pthread_mutex_unlock(&philo->left_fork);
-	*philo->rfork_st = 1;
-	pthread_mutex_unlock(philo->right_fork);
+	if (philo->nb_of_philos > 2)
+	{
+		pthread_mutex_lock(philo->right_fork);
+		*philo->rfork_st = 0;
+		ft_print_msg(philo, 1);
+		pthread_mutex_lock(&philo->mlast_lunch);
+		philo->last_lunch = ft_gettime();
+		pthread_mutex_unlock(&philo->mlast_lunch);
+		pthread_mutex_lock(&philo->mnb_lunch);
+		philo->nb_lunch++;
+		pthread_mutex_unlock(&philo->mnb_lunch);
+		ft_print_msg(philo, 2);
+		ft_usleep(philo->time_to_eat);
+		philo->lfork_st = 1;
+		pthread_mutex_unlock(&philo->left_fork);
+		*philo->rfork_st = 1;
+		pthread_mutex_unlock(philo->right_fork);
+	}
+	else
+		ft_usleep(philo->time_to_die);
 }
 
 int	ft_the_glorious_dead(t_philo *philo)
@@ -84,7 +89,7 @@ void	ft_end_check(t_common *data)
 	while (!data->the_glorious_dead)
 	{
 		i = 0;
-		ft_usleep(20);
+		ft_usleep(5);
 		while (i < data->nb_of_philos)
 		{
 			pthread_mutex_lock(&data->philo[i].mlast_lunch);

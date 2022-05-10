@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:55:37 by acroisie          #+#    #+#             */
-/*   Updated: 2022/05/10 09:38:09 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 10:29:15 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_philo
 	int				*rfork_st;
 	int				*the_glorious_dead;
 	pthread_t		thread;
+	int				nb_of_philos;
 	int				id;
 	int				time_to_die;
 	int				time_to_eat;
