@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/14 16:01:20 by acroisie          #+#    #+#              #
-#    Updated: 2022/05/10 14:00:26 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/05/10 16:06:50 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,10 @@ objs/%.o:	srcs/%.c include/philo.h Makefile
 
 clean :
 		rm -rf objs
-		make clean -C libft
 
 fclean : clean
 		rm -f $(NAME)
-		make fclean -C libft
 
 re : fclean all
 
-.PHONY : re clean fclean libft all .PHONY
+.PHONY : re clean fclean all
